@@ -877,7 +877,7 @@
     <p>Résumés de cours, exercices corrigés et vidéos explicatives pour réussir les concours des Grandes Écoles de Commerce.</p>
     <div class="hero-stats">
         <div class="hero-stat">
-            <span class="number" id="statChapters">13</span>
+            <span class="number" id="statChapters">14</span>
             <span class="label">Chapitres</span>
         </div>
         <div class="hero-stat">
@@ -951,337 +951,79 @@ const chapters = [
         title: "Suites numériques",
         branch: "analyse",
         number: "A1",
-        description: "Généralités, modes de génération, monotonie, convergence, opérations sur les limites, théorèmes de comparaison, suites monotones bornées, suites adjacentes et extraites.",
-        tags: ["resume", "exercices"],
+        description: "Suites arithmétiques, géométriques, récurrentes. Convergence et limites. Suites adjacentes et théorèmes fondamentaux.",
+        tags: ["resume", "exercices", "video"],
         resume: `
-<div class="content-block">
-<h2>Résumé — Suites numériques</h2>
+            <div class="content-block">
+                <h2>Résumé — Suites numériques</h2>
 
-<!-- ═══ 1. GENERALITES ═══ -->
-<h3>1. Généralités</h3>
+                <div class="definition">
+                    <span class="label">Définition — Suite numérique</span>
+                    <p>Une suite numérique est une application de \\(\\mathbb{N}\\) (ou d'une partie de \\(\\mathbb{N}\\)) dans \\(\\mathbb{R}\\). On la note \\((u_n)_{n \\in \\mathbb{N}}\\) ou simplement \\((u_n)\\).</p>
+                </div>
 
-<div class="definition">
-    <span class="label">Définition — Suite numérique</span>
-    <p>Soit \\(p \\in \\mathbb{N}\\). Toute application \\(u : [\\![p;+\\infty[\\![ \\to \\mathbb{R}\\) est appelée <strong>suite numérique</strong>. On la note \\((u_n)_{n \\geq p}\\).</p>
-    <p>L'image de \\(m\\) par \\(u\\) est notée \\(u_m\\) : c'est le <strong>terme d'indice</strong> \\(m\\). L'expression de \\(u_n\\) en fonction de \\(n\\) est le <strong>terme général</strong>.</p>
-</div>
+                <h3>Suites arithmétiques et géométriques</h3>
+                <div class="property">
+                    <span class="label">Propriété — Suite arithmétique</span>
+                    <p>\\((u_n)\\) est arithmétique de raison \\(r\\) si : \\(\\forall n \\in \\mathbb{N},\\; u_{n+1} = u_n + r\\)</p>
+                    <p>Terme général : \\(u_n = u_0 + nr\\)</p>
+                    <p>Somme des termes : \\(\\displaystyle\\sum_{k=0}^{n} u_k = (n+1)\\frac{u_0 + u_n}{2}\\)</p>
+                </div>
 
-<div class="definition">
-    <span class="label">Définition — Majorée, minorée, bornée</span>
-    <p>\\((u_n)\\) est <strong>majorée</strong> si \\(\\exists M \\in \\mathbb{R},\\; \\forall n,\\; u_n \\leq M\\).</p>
-    <p>\\((u_n)\\) est <strong>minorée</strong> si \\(\\exists m \\in \\mathbb{R},\\; \\forall n,\\; u_n \\geq m\\).</p>
-    <p>\\((u_n)\\) est <strong>bornée</strong> si elle est à la fois majorée et minorée.</p>
-</div>
+                <div class="property">
+                    <span class="label">Propriété — Suite géométrique</span>
+                    <p>\\((u_n)\\) est géométrique de raison \\(q \\neq 0\\) si : \\(\\forall n \\in \\mathbb{N},\\; u_{n+1} = q \\cdot u_n\\)</p>
+                    <p>Terme général : \\(u_n = u_0 \\cdot q^n\\)</p>
+                    <p>Somme des termes (\\(q \\neq 1\\)) : \\(\\displaystyle\\sum_{k=0}^{n} u_k = u_0 \\cdot \\frac{1 - q^{n+1}}{1 - q}\\)</p>
+                </div>
 
-<div class="definition">
-    <span class="label">Définition — Suite constante et stationnaire</span>
-    <p>\\((u_n)\\) est <strong>constante</strong> si \\(\\exists c \\in \\mathbb{R},\\; \\forall n,\\; u_n = c\\).</p>
-    <p>\\((u_n)\\) est <strong>stationnaire</strong> si \\(\\exists N \\in \\mathbb{N},\\; \\forall n \\geq N,\\; u_n = c\\).</p>
-</div>
+                <h3>Convergence</h3>
+                <div class="theorem">
+                    <span class="label">Théorème — Suites monotones bornées</span>
+                    <p>Toute suite croissante et majorée converge. Toute suite décroissante et minorée converge.</p>
+                </div>
 
-<h3>2. Modes de génération</h3>
-
-<div class="definition">
-    <span class="label">Définition — Suite définie par son terme général</span>
-    <p>\\(\\forall n \\geq p,\\; u_n = f(n)\\) où \\(f\\) est une expression explicite en \\(n\\).</p>
-</div>
-
-<div class="definition">
-    <span class="label">Définition — Suite définie par récurrence</span>
-    <p>On connaît \\(u_0\\) (ou les premiers termes) et une relation \\(u_{n+1} = f(u_n)\\).</p>
-</div>
-
-<div class="property">
-    <span class="label">Cas particuliers importants</span>
-    <p><strong>Suite arithmétique :</strong> \\(u_{n+1} = u_n + r\\). Terme général : \\(u_n = u_0 + nr\\).</p>
-    <p><strong>Suite géométrique :</strong> \\(u_{n+1} = q\\, u_n\\). Terme général : \\(u_n = u_0 \\, q^n\\).</p>
-    <p><strong>Suite arithmético-géométrique :</strong> \\(u_{n+1} = a\\, u_n + b\\) avec \\(a \\neq 1\\). On pose \\(\\ell = \\dfrac{b}{1-a}\\) et \\(v_n = u_n - \\ell\\). Alors \\((v_n)\\) est géométrique de raison \\(a\\) et :
-    \\[u_n = \\ell + (u_0 - \\ell)\\,a^n\\]</p>
-</div>
-
-<!-- ═══ 3. MONOTONIE ═══ -->
-<h3>3. Sens de variation</h3>
-
-<div class="definition">
-    <span class="label">Définition — Monotonie</span>
-    <p>\\((u_n)\\) est <strong>croissante</strong> si \\(\\forall n,\\; u_{n+1} \\geq u_n\\) ; <strong>décroissante</strong> si \\(\\forall n,\\; u_{n+1} \\leq u_n\\).</p>
-</div>
-
-<div class="method">
-    <span class="label">Méthode — Étude de la monotonie</span>
-    <p><strong>1. Différence :</strong> étudier le signe de \\(u_{n+1} - u_n\\).</p>
-    <p><strong>2. Quotient :</strong> si \\(u_n > 0\\), comparer \\(\\dfrac{u_{n+1}}{u_n}\\) à 1.</p>
-    <p><strong>3. Si \\(u_n = f(n)\\) :</strong> la suite a la même monotonie que \\(f\\).</p>
-    <p><strong>4. Si \\(u_{n+1} = f(u_n)\\) avec \\(f\\) croissante :</strong> étudier le signe de \\(u_1 - u_0\\) puis raisonner par récurrence.</p>
-    <p><strong>5. Signe de \\(f(x) - x\\) :</strong> si \\(f(x) \\geq x\\) sur un intervalle stable \\(I\\) et \\(u_n \\in I\\), alors \\(u_{n+1} \\geq u_n\\).</p>
-</div>
-
-<!-- ═══ 4. CONVERGENCE ═══ -->
-<h3>4. Limite et convergence</h3>
-
-<div class="definition">
-    <span class="label">Définition — Convergence</span>
-    <p>\\((u_n)\\) <strong>converge</strong> vers \\(\\ell \\in \\mathbb{R}\\) si :
-    \\[\\forall \\varepsilon > 0,\\; \\exists N \\in \\mathbb{N},\\; \\forall n \\geq N,\\; |u_n - \\ell| < \\varepsilon\\]</p>
-</div>
-
-<div class="definition">
-    <span class="label">Définition — Divergence vers \\(\\pm\\infty\\)</span>
-    <p>\\((u_n)\\) <strong>diverge vers \\(+\\infty\\)</strong> si : \\(\\forall A \\in \\mathbb{R},\\; \\exists N,\\; \\forall n \\geq N,\\; u_n > A\\).</p>
-</div>
-
-<div class="property">
-    <span class="label">Limites de référence</span>
-    <p>\\(\\displaystyle \\lim \\frac{1}{n^k} = 0\\;(k > 0)\\), &emsp; \\(\\lim n = +\\infty\\), &emsp; \\(\\lim \\sqrt{n} = +\\infty\\).</p>
-    <p><strong>Puissances :</strong> \\(\\lim a^n = 0\\) si \\(|a| < 1\\) ; \\(= 1\\) si \\(a = 1\\) ; \\(= +\\infty\\) si \\(a > 1\\).</p>
-    <p><strong>Fraction rationnelle :</strong> \\(\\displaystyle \\lim \\frac{P(n)}{Q(n)} = \\lim \\frac{a_p\\, n^p}{b_q\\, n^q}\\) (termes de plus haut degré).</p>
-</div>
-
-<h3>5. Opérations sur les limites</h3>
-
-<div class="property">
-    <span class="label">Somme</span>
-    <p>Si \\(u_n \\to \\ell\\) et \\(v_n \\to \\ell'\\), alors \\(u_n + v_n \\to \\ell + \\ell'\\).</p>
-    <p>Si \\(u_n \\to \\ell\\) et \\(v_n \\to +\\infty\\), alors \\(u_n + v_n \\to +\\infty\\).</p>
-    <p><strong>FI :</strong> \\((+\\infty) + (-\\infty)\\).</p>
-</div>
-
-<div class="property">
-    <span class="label">Produit</span>
-    <p>Si \\(u_n \\to \\ell\\) et \\(v_n \\to \\ell'\\), alors \\(u_n v_n \\to \\ell \\ell'\\).</p>
-    <p><strong>FI :</strong> \\(0 \\times (\\pm\\infty)\\).</p>
-</div>
-
-<div class="property">
-    <span class="label">Quotient</span>
-    <p>Si \\(u_n \\to \\ell\\) et \\(v_n \\to \\ell' \\neq 0\\), alors \\(\\dfrac{u_n}{v_n} \\to \\dfrac{\\ell}{\\ell'}\\).</p>
-    <p><strong>FI :</strong> \\(\\dfrac{0}{0}\\), \\(\\dfrac{\\pm\\infty}{\\pm\\infty}\\).</p>
-</div>
-
-<!-- ═══ 6. COMPARAISON ═══ -->
-<h3>6. Théorèmes de comparaison</h3>
-
-<div class="theorem">
-    <span class="label">Théorème — Majoration par une suite tendant vers 0</span>
-    <p>Si \\(|u_n - \\ell| \\leq v_n\\) à partir d'un certain rang et \\(v_n \\to 0\\), alors \\(u_n \\to \\ell\\).</p>
-</div>
-
-<div class="property">
-    <span class="label">Corollaire</span>
-    <p>Si \\((u_n)\\) est bornée et \\(v_n \\to 0\\), alors \\(u_n v_n \\to 0\\).</p>
-</div>
-
-<div class="theorem">
-    <span class="label">Théorème des gendarmes</span>
-    <p>Si \\(u_n \\leq v_n \\leq w_n\\) à partir d'un certain rang et \\(u_n \\to \\ell\\), \\(w_n \\to \\ell\\), alors \\(v_n \\to \\ell\\).</p>
-</div>
-
-<div class="theorem">
-    <span class="label">Passage à la limite dans une inégalité</span>
-    <p>Si \\(u_n \\leq v_n\\) à partir d'un certain rang et les deux suites convergent, alors \\(\\lim u_n \\leq \\lim v_n\\).</p>
-    <p><strong>Attention :</strong> les inégalités strictes deviennent larges au passage à la limite.</p>
-</div>
-
-<div class="theorem">
-    <span class="label">Comparaison et divergence</span>
-    <p>Si \\(u_n \\leq v_n\\) à partir d'un certain rang et \\(u_n \\to +\\infty\\), alors \\(v_n \\to +\\infty\\).</p>
-</div>
-
-<!-- ═══ 7. MONOTONE BORNEE ═══ -->
-<h3>7. Suites monotones bornées</h3>
-
-<div class="theorem">
-    <span class="label">Théorème fondamental</span>
-    <p>Toute suite <strong>croissante et majorée</strong> converge.</p>
-    <p>Toute suite <strong>décroissante et minorée</strong> converge.</p>
-</div>
-
-<div class="property">
-    <span class="label">Propriété — Suites monotones non bornées</span>
-    <p>Toute suite croissante non majorée diverge vers \\(+\\infty\\).</p>
-    <p>Toute suite décroissante non minorée diverge vers \\(-\\infty\\).</p>
-</div>
-
-<!-- ═══ 8. COMPLEMENTS ═══ -->
-<h3>8. Compléments</h3>
-
-<div class="definition">
-    <span class="label">Définition — Suites adjacentes</span>
-    <p>\\((u_n)\\) et \\((v_n)\\) sont <strong>adjacentes</strong> si \\((u_n)\\) est croissante, \\((v_n)\\) est décroissante, et \\(u_n - v_n \\to 0\\).</p>
-</div>
-
-<div class="theorem">
-    <span class="label">Théorème — Convergence des suites adjacentes</span>
-    <p>Deux suites adjacentes convergent vers une même limite \\(\\ell\\) et \\(\\forall n,\\; u_n \\leq \\ell \\leq v_n\\).</p>
-</div>
-
-<div class="definition">
-    <span class="label">Définition — Suite extraite</span>
-    <p>Une suite extraite de \\((u_n)\\) est toute suite \\((u_{\\varphi(n)})\\) où \\(\\varphi : \\mathbb{N} \\to \\mathbb{N}\\) est strictement croissante.</p>
-    <p>Exemples : \\((u_{2n})\\), \\((u_{2n+1})\\), \\((u_{3n})\\), \\((u_{n^2})\\).</p>
-</div>
-
-<div class="theorem">
-    <span class="label">Théorème — Suites extraites et convergence</span>
-    <p>Si \\((u_{2n})\\) et \\((u_{2n+1})\\) convergent vers la même limite \\(\\ell\\), alors \\((u_n)\\) converge vers \\(\\ell\\).</p>
-    <p><strong>Contraposée :</strong> si \\((u_{2n})\\) et \\((u_{2n+1})\\) n'ont pas la même limite, alors \\((u_n)\\) diverge.</p>
-</div>
-
-</div>
+                <div class="theorem">
+                    <span class="label">Théorème — Suites adjacentes</span>
+                    <p>Si \\((u_n)\\) est croissante, \\((v_n)\\) est décroissante, et \\(\\lim_{n \\to +\\infty}(v_n - u_n) = 0\\), alors \\((u_n)\\) et \\((v_n)\\) convergent vers la même limite.</p>
+                </div>
+            </div>
         `,
         exercices: [
             {
-                title: "Exercice 1 — Système de suites couplées",
+                title: "Exercice 1 — Suite récurrente et convergence",
                 difficulty: 2,
-                enonce: `On considère deux suites \\((u_n)\\) et \\((v_n)\\) telles que :
-                \\[\\forall n \\in \\mathbb{N},\\quad \\begin{cases} u_{n+1} = 2u_n - v_n \\\\ v_{n+1} = u_n + 4v_n \\end{cases} \\quad \\text{et} \\quad \\begin{cases} u_0 = 2 \\\\ v_0 = -1 \\end{cases}\\]
-                <p style="margin-top:0.75rem;"><strong>1.</strong> On pose \\(p_n = u_n + v_n\\). Montrer que \\((p_n)\\) est géométrique. En déduire \\(p_n\\) en fonction de \\(n\\).</p>
-                <p><strong>2.</strong> Montrer que \\(\\forall n \\in \\mathbb{N},\\; v_{n+1} = 3v_n + 3^n\\).</p>
-                <p><strong>3.</strong> Montrer que \\(z_n = \\dfrac{v_n}{3^n}\\) est arithmétique. En déduire \\(z_n\\).</p>
-                <p><strong>4.</strong> Donner \\(v_n\\) puis \\(u_n\\) en fonction de \\(n\\).</p>`,
-                correction: `<p><strong>1.</strong> \\(p_{n+1} = u_{n+1} + v_{n+1} = (2u_n - v_n) + (u_n + 4v_n) = 3u_n + 3v_n = 3p_n\\).</p>
-                <p>Donc \\((p_n)\\) est géométrique de raison 3 et \\(p_0 = u_0 + v_0 = 2 + (-1) = 1\\).</p>
-                <p>Ainsi : \\(\\boxed{p_n = 3^n}\\).</p>
-                <p><strong>2.</strong> On a \\(u_n = p_n - v_n = 3^n - v_n\\). En substituant dans \\(v_{n+1} = u_n + 4v_n\\) :</p>
-                <p>\\(v_{n+1} = (3^n - v_n) + 4v_n = 3v_n + 3^n\\).</p>
-                <p><strong>3.</strong> \\(z_{n+1} = \\dfrac{v_{n+1}}{3^{n+1}} = \\dfrac{3v_n + 3^n}{3^{n+1}} = \\dfrac{v_n}{3^n} + \\dfrac{1}{3} = z_n + \\dfrac{1}{3}\\).</p>
-                <p>Donc \\((z_n)\\) est arithmétique de raison \\(r = \\frac{1}{3}\\) et \\(z_0 = \\frac{v_0}{1} = -1\\).</p>
-                <p>\\(\\boxed{z_n = -1 + \\frac{n}{3} = \\frac{n-3}{3}}\\).</p>
-                <p><strong>4.</strong> \\(v_n = z_n \\cdot 3^n = \\dfrac{n-3}{3} \\cdot 3^n = (n-3) \\cdot 3^{n-1}\\).</p>
-                <p>\\(u_n = p_n - v_n = 3^n - (n-3) \\cdot 3^{n-1} = 3^{n-1}(3 - n + 3) = (6-n) \\cdot 3^{n-1}\\).</p>
-                <p>\\(\\boxed{v_n = (n-3)\\cdot 3^{n-1}, \\quad u_n = (6-n)\\cdot 3^{n-1}}\\).</p>`
+                enonce: `On considère la suite \\((u_n)\\) définie par \\(u_0 = 2\\) et \\(\\forall n \\in \\mathbb{N},\\; u_{n+1} = \\dfrac{1}{2}u_n + 1\\).
+                <p style="margin-top:0.75rem;">1. Montrer que la suite \\((u_n)\\) est décroissante et minorée par 2.</p>
+                <p>2. En déduire que \\((u_n)\\) converge et déterminer sa limite \\(\\ell\\).</p>
+                <p>3. On pose \\(v_n = u_n - 2\\). Déterminer la nature de \\((v_n)\\).</p>`,
+                correction: `<p><strong>1.</strong> Montrons par récurrence que \\(u_n \\geq 2\\) pour tout \\(n\\).</p>
+                <p>• <em>Initialisation :</em> \\(u_0 = 2 \\geq 2\\). ✓</p>
+                <p>• <em>Hérédité :</em> Supposons \\(u_n \\geq 2\\). Alors \\(u_{n+1} = \\frac{1}{2}u_n + 1 \\geq \\frac{1}{2}(2) + 1 = 2\\). ✓</p>
+                <p>Montrons que \\((u_n)\\) est décroissante : \\(u_{n+1} - u_n = -\\frac{1}{2}u_n + 1 = -\\frac{1}{2}(u_n - 2) \\leq 0\\) car \\(u_n \\geq 2\\).</p>
+                <p><strong>2.</strong> \\((u_n)\\) est décroissante et minorée, donc elle converge. À la limite : \\(\\ell = \\frac{1}{2}\\ell + 1\\), soit \\(\\ell = 2\\).</p>
+                <p><strong>3.</strong> \\(v_{n+1} = u_{n+1} - 2 = \\frac{1}{2}u_n + 1 - 2 = \\frac{1}{2}(u_n - 2) = \\frac{1}{2}v_n\\).</p>
+                <p>Donc \\((v_n)\\) est géométrique de raison \\(\\frac{1}{2}\\) et de premier terme \\(v_0 = 0\\). Ainsi \\(v_n = 0\\) pour tout \\(n\\), et \\(u_n = 2\\) pour tout \\(n\\).</p>`
             },
             {
-                title: "Exercice 2 — Système triangulaire de suites",
+                title: "Exercice 2 — Sommes et suites arithmético-géométriques",
                 difficulty: 3,
-                enonce: `On considère les suites \\((u_n)\\), \\((v_n)\\) et \\((w_n)\\) définies par :
-                \\[u_0 = v_0 = w_0 = 1 \\quad \\text{et} \\quad \\forall n \\in \\mathbb{N},\\; \\begin{cases} u_{n+1} = 2u_n \\\\ v_{n+1} = -u_n + 2v_n \\\\ w_{n+1} = u_n - v_n + 2w_n \\end{cases}\\]
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Exprimer \\(u_n\\) en fonction de \\(n\\).</p>
-                <p><strong>2.</strong> Soit \\(x_n = \\dfrac{v_n}{u_n}\\). Montrer que \\((x_n)\\) est arithmétique.</p>
-                <p><strong>3.</strong> Déterminer \\(v_n\\) en fonction de \\(n\\).</p>
-                <p><strong>4.</strong> Soit \\(y_n = \\dfrac{w_n}{u_n}\\). Exprimer \\(y_{n+1}\\) en fonction de \\(y_n\\) et \\(x_n\\), puis déterminer \\(w_n\\).</p>`,
-                correction: `<p><strong>1.</strong> \\(u_{n+1} = 2u_n\\) avec \\(u_0 = 1\\). C'est une suite géométrique de raison 2 : \\(\\boxed{u_n = 2^n}\\).</p>
-                <p><strong>2.</strong> \\(x_{n+1} = \\dfrac{v_{n+1}}{u_{n+1}} = \\dfrac{-u_n + 2v_n}{2u_n} = -\\dfrac{1}{2} + \\dfrac{v_n}{u_n} = x_n - \\dfrac{1}{2}\\).</p>
-                <p>\\((x_n)\\) est arithmétique de raison \\(-\\frac{1}{2}\\) et \\(x_0 = \\frac{1}{1} = 1\\). Donc \\(x_n = 1 - \\frac{n}{2} = \\frac{2-n}{2}\\).</p>
-                <p><strong>3.</strong> \\(v_n = x_n \\cdot u_n = \\dfrac{2-n}{2} \\cdot 2^n = \\boxed{(2-n) \\cdot 2^{n-1}}\\).</p>
-                <p><strong>4.</strong> \\(y_{n+1} = \\dfrac{w_{n+1}}{u_{n+1}} = \\dfrac{u_n - v_n + 2w_n}{2u_n} = \\dfrac{1}{2} - \\dfrac{v_n}{2u_n} + \\dfrac{w_n}{u_n} = \\dfrac{1}{2} - \\dfrac{x_n}{2} + y_n\\).</p>
-                <p>\\(y_{n+1} = y_n + \\dfrac{1}{2} - \\dfrac{1}{2}\\cdot\\dfrac{2-n}{2} = y_n + \\dfrac{n}{4}\\).</p>
-                <p>Donc \\(y_n = y_0 + \\dfrac{1}{4}\\sum_{k=0}^{n-1}k = 1 + \\dfrac{n(n-1)}{8}\\).</p>
-                <p>\\(w_n = y_n \\cdot u_n = \\left(1 + \\dfrac{n(n-1)}{8}\\right) \\cdot 2^n = \\boxed{\\dfrac{n^2 - n + 8}{8} \\cdot 2^n = (n^2 - n + 8) \\cdot 2^{n-3}}\\).</p>`
-            },
-            {
-                title: "Exercice 3 — Suite arithmético-géométrique avec second membre polynomial",
-                difficulty: 2,
-                enonce: `Soit \\((u_n)\\) vérifiant \\(u_{n+1} = 2u_n + n\\) et \\(u_0 = 1\\).
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Montrer qu'il existe \\((a,b) \\in \\mathbb{R}^2\\) tel que \\(w_n = an + b\\) vérifie \\(w_{n+1} = 2w_n + n\\).</p>
-                <p><strong>2.</strong> Montrer que \\(z_n = u_n + n + 1\\) vérifie \\(z_{n+1} = 2z_n\\).</p>
-                <p><strong>3.</strong> En déduire \\(z_n\\) puis \\(u_n\\) en fonction de \\(n\\).</p>`,
-                correction: `<p><strong>1.</strong> On cherche \\(w_n = an + b\\) tel que \\(w_{n+1} = 2w_n + n\\), soit \\(a(n+1) + b = 2(an+b) + n\\).</p>
-                <p>\\(an + a + b = 2an + 2b + n = (2a+1)n + 2b\\).</p>
-                <p>Par identification : \\(a = 2a + 1\\) et \\(a + b = 2b\\), d'où \\(a = -1\\) et \\(b = -1\\).</p>
-                <p>Donc \\(w_n = -n - 1\\).</p>
-                <p><strong>2.</strong> \\(z_n = u_n - w_n = u_n + n + 1\\).</p>
-                <p>\\(z_{n+1} = u_{n+1} + (n+1) + 1 = (2u_n + n) + n + 2 = 2u_n + 2n + 2 = 2(u_n + n + 1) = 2z_n\\). ✓</p>
-                <p><strong>3.</strong> \\((z_n)\\) est géométrique de raison 2, \\(z_0 = u_0 + 0 + 1 = 2\\). Donc \\(z_n = 2 \\cdot 2^n = 2^{n+1}\\).</p>
-                <p>\\(u_n = z_n - n - 1 = \\boxed{2^{n+1} - n - 1}\\).</p>`
-            },
-            {
-                title: "Exercice 4 — Méthode de Héron (approximation de √2)",
-                difficulty: 3,
-                enonce: `On considère \\((u_n)\\) définie par \\(u_0 = 2\\) et \\(u_{n+1} = \\dfrac{1}{2}\\left(u_n + \\dfrac{2}{u_n}\\right)\\).
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Montrer que pour tout \\(n \\geq 0\\), \\(u_n\\) existe et \\(u_n > \\sqrt{2}\\).</p>
-                <p><strong>2.</strong> Montrer que la suite est décroissante et en déduire qu'elle converge.</p>
-                <p><strong>3.</strong> On pose \\(v_n = \\dfrac{u_n - \\sqrt{2}}{u_n + \\sqrt{2}}\\) et \\(w_n = \\ln(v_n)\\).</p>
-                <p>&emsp; a) Montrer que \\(v_n > 0\\).</p>
-                <p>&emsp; b) Montrer que \\(v_0 < 1\\) et que \\(v_{n+1} = (v_n)^2\\).</p>
-                <p>&emsp; c) Reconnaître la suite \\((w_n)\\). En déduire \\(w_n\\) puis \\(v_n\\).</p>
-                <p><strong>4.</strong> Déterminer \\(\\lim v_n\\) puis \\(\\lim u_n\\).</p>`,
-                correction: `<p><strong>1.</strong> Par récurrence. \\(u_0 = 2 > \\sqrt{2}\\) ✓. Si \\(u_n > \\sqrt{2} > 0\\) alors \\(u_n\\) existe (non nul) et :</p>
-                <p>\\(u_{n+1} - \\sqrt{2} = \\dfrac{1}{2}\\left(u_n + \\dfrac{2}{u_n}\\right) - \\sqrt{2} = \\dfrac{u_n^2 + 2 - 2\\sqrt{2}\\,u_n}{2u_n} = \\dfrac{(u_n - \\sqrt{2})^2}{2u_n} > 0\\).</p>
-                <p>Donc \\(u_{n+1} > \\sqrt{2}\\). ✓</p>
-                <p><strong>2.</strong> \\(u_{n+1} - u_n = \\dfrac{1}{2}\\left(\\dfrac{2}{u_n} - u_n\\right) = \\dfrac{2 - u_n^2}{2u_n}\\). Or \\(u_n > \\sqrt{2}\\) donc \\(u_n^2 > 2\\), d'où \\(u_{n+1} - u_n < 0\\).</p>
-                <p>\\((u_n)\\) est décroissante et minorée par \\(\\sqrt{2}\\), donc elle converge.</p>
-                <p><strong>3.a)</strong> \\(u_n > \\sqrt{2}\\) donc \\(u_n - \\sqrt{2} > 0\\) et \\(u_n + \\sqrt{2} > 0\\), d'où \\(v_n > 0\\).</p>
-                <p><strong>3.b)</strong> \\(v_0 = \\dfrac{2 - \\sqrt{2}}{2 + \\sqrt{2}} = \\dfrac{(2-\\sqrt{2})^2}{2} = 3 - 2\\sqrt{2} \\approx 0{,}17 < 1\\). ✓</p>
-                <p>Calcul de \\(v_{n+1}\\) : on pose \\(u_{n+1} = \\dfrac{u_n^2 + 2}{2u_n}\\), alors :</p>
-                <p>\\(v_{n+1} = \\dfrac{u_{n+1} - \\sqrt{2}}{u_{n+1} + \\sqrt{2}} = \\dfrac{(u_n - \\sqrt{2})^2}{(u_n + \\sqrt{2})^2} = v_n^2\\). ✓</p>
-                <p><strong>3.c)</strong> \\(w_{n+1} = \\ln(v_{n+1}) = \\ln(v_n^2) = 2\\ln(v_n) = 2w_n\\).</p>
-                <p>\\((w_n)\\) est géométrique de raison 2 : \\(w_n = w_0 \\cdot 2^n = 2^n \\ln(3 - 2\\sqrt{2})\\).</p>
-                <p>\\(v_n = e^{w_n} = (3 - 2\\sqrt{2})^{2^n}\\).</p>
-                <p><strong>4.</strong> \\(0 < 3 - 2\\sqrt{2} < 1\\), donc \\(v_n \\to 0\\). Comme \\(v_n = \\dfrac{u_n - \\sqrt{2}}{u_n + \\sqrt{2}} \\to 0\\), on obtient \\(u_n \\to \\sqrt{2}\\).</p>`
-            },
-            {
-                title: "Exercice 5 — Suite homographique",
-                difficulty: 2,
-                enonce: `On considère \\(u_0 = 1\\) et \\(\\forall n \\in \\mathbb{N},\\; u_{n+1} = \\dfrac{3u_n + 1}{2u_n + 4}\\).
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Montrer que \\(\\forall n \\in \\mathbb{N},\\; u_n \\in \\mathbb{R}_+\\).</p>
-                <p>On pose \\(t_n = \\dfrac{2u_n - 1}{u_n + 1}\\).</p>
-                <p><strong>2.</strong> Montrer que \\((t_n)\\) est géométrique.</p>
-                <p><strong>3.</strong> Expliciter \\(t_n\\) puis \\(u_n\\) en fonction de \\(n\\). En déduire la convergence et la limite.</p>`,
-                correction: `<p><strong>1.</strong> Par récurrence. \\(u_0 = 1 \\geq 0\\) ✓. Si \\(u_n \\geq 0\\) : \\(u_{n+1} = \\dfrac{3u_n + 1}{2u_n + 4}\\). Numérateur et dénominateur sont \\(> 0\\), donc \\(u_{n+1} > 0\\). ✓</p>
-                <p><strong>2.</strong> \\(t_{n+1} = \\dfrac{2u_{n+1} - 1}{u_{n+1} + 1} = \\dfrac{2 \\cdot \\frac{3u_n+1}{2u_n+4} - 1}{\\frac{3u_n+1}{2u_n+4} + 1} = \\dfrac{6u_n + 2 - 2u_n - 4}{3u_n + 1 + 2u_n + 4} = \\dfrac{4u_n - 2}{5u_n + 5} = \\dfrac{2(2u_n - 1)}{5(u_n + 1)} = \\dfrac{2}{5}\\, t_n\\).</p>
-                <p>\\((t_n)\\) est géométrique de raison \\(\\frac{2}{5}\\). ✓</p>
-                <p><strong>3.</strong> \\(t_0 = \\dfrac{2-1}{1+1} = \\dfrac{1}{2}\\). Donc \\(t_n = \\dfrac{1}{2}\\left(\\dfrac{2}{5}\\right)^n\\).</p>
-                <p>De \\(t_n = \\dfrac{2u_n - 1}{u_n + 1}\\) on tire \\(t_n(u_n + 1) = 2u_n - 1\\), soit \\(u_n(t_n - 2) = -1 - t_n\\), d'où :</p>
-                <p>\\(u_n = \\dfrac{1 + t_n}{2 - t_n}\\).</p>
-                <p>Comme \\(t_n \\to 0\\), on obtient \\(\\boxed{u_n \\to \\dfrac{1}{2}}\\).</p>`
-            },
-            {
-                title: "Exercice 6 — Croissance comparée n/2ⁿ → 0",
-                difficulty: 2,
-                enonce: `On veut montrer que \\(u_n = \\dfrac{n}{2^n} \\to 0\\). On pose, pour \\(n \\geq 1\\), \\(v_n = \\dfrac{u_{n+1}}{u_n}\\).
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Démontrer que \\((v_n)\\) converge vers \\(\\frac{1}{2}\\).</p>
-                <p><strong>2.</strong> En déduire qu'il existe \\(n_0\\) tel que pour tout \\(n \\geq n_0\\), \\(\\dfrac{u_{n+1}}{u_n} \\leq \\dfrac{3}{4}\\).</p>
-                <p><strong>3.</strong> Démontrer que pour tout \\(n \\geq n_0\\), \\(u_n \\leq \\left(\\dfrac{3}{4}\\right)^{n-n_0} u_{n_0}\\).</p>
-                <p><strong>4.</strong> En déduire que \\(u_n \\to 0\\).</p>`,
-                correction: `<p><strong>1.</strong> \\(v_n = \\dfrac{u_{n+1}}{u_n} = \\dfrac{(n+1)/2^{n+1}}{n/2^n} = \\dfrac{n+1}{2n} \\to \\dfrac{1}{2}\\). ✓</p>
-                <p><strong>2.</strong> \\(v_n \\to \\frac{1}{2} < \\frac{3}{4}\\). Par définition de la limite avec \\(\\varepsilon = \\frac{1}{4}\\), il existe \\(n_0\\) tel que pour \\(n \\geq n_0\\) : \\(v_n < \\frac{1}{2} + \\frac{1}{4} = \\frac{3}{4}\\).</p>
-                <p>Donc \\(\\dfrac{u_{n+1}}{u_n} \\leq \\frac{3}{4}\\) pour tout \\(n \\geq n_0\\). ✓</p>
-                <p><strong>3.</strong> Par récurrence (ou télescopage). Pour \\(n \\geq n_0\\) :</p>
-                <p>\\(u_n = \\dfrac{u_n}{u_{n-1}} \\cdot \\dfrac{u_{n-1}}{u_{n-2}} \\cdots \\dfrac{u_{n_0+1}}{u_{n_0}} \\cdot u_{n_0} \\leq \\left(\\dfrac{3}{4}\\right)^{n-n_0} u_{n_0}\\). ✓</p>
-                <p><strong>4.</strong> \\(0 \\leq u_n \\leq u_{n_0} \\left(\\frac{3}{4}\\right)^{n-n_0} \\to 0\\) car \\(\\frac{3}{4} < 1\\). Par le théorème des gendarmes, \\(\\boxed{u_n \\to 0}\\).</p>`
-            },
-            {
-                title: "Exercice 7 — Suite de radicaux imbriqués",
-                difficulty: 3,
-                enonce: `Soit \\((u_n)\\) définie pour \\(n \\in \\mathbb{N}^*\\) par : \\(u_n = \\sqrt{n + \\sqrt{n-1 + \\sqrt{\\cdots + \\sqrt{1}}}}\\).
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Écrire une relation de récurrence liant \\(u_{n-1}\\) et \\(u_n\\).</p>
-                <p><strong>2.</strong> Montrer que la suite \\(\\left(\\dfrac{u_n}{\\sqrt{n}}\\right)\\) est bornée.</p>
-                <p><strong>3.</strong> Déterminer sa limite.</p>`,
-                correction: `<p><strong>1.</strong> On a \\(u_n = \\sqrt{n + u_{n-1}}\\) pour \\(n \\geq 2\\), avec \\(u_1 = 1\\).</p>
-                <p><strong>2.</strong> Montrons que \\(u_n \\leq 2\\sqrt{n}\\) par récurrence.</p>
-                <p>\\(u_1 = 1 \\leq 2\\). Si \\(u_{n-1} \\leq 2\\sqrt{n-1}\\), alors :</p>
-                <p>\\(u_n = \\sqrt{n + u_{n-1}} \\leq \\sqrt{n + 2\\sqrt{n-1}} \\leq \\sqrt{n + 2\\sqrt{n}} \\leq \\sqrt{4n} = 2\\sqrt{n}\\)</p>
-                <p>(car \\(n + 2\\sqrt{n} = (\\sqrt{n}+1)^2 - 1 < (\\sqrt{n}+1)^2 \\leq 4n\\) pour \\(n \\geq 1\\)).</p>
-                <p>Donc \\(0 < \\dfrac{u_n}{\\sqrt{n}} \\leq 2\\), la suite est bornée. ✓</p>
-                <p><strong>3.</strong> De \\(u_n = \\sqrt{n + u_{n-1}}\\), on a \\(u_n^2 = n + u_{n-1}\\), soit \\(\\dfrac{u_n^2}{n} = 1 + \\dfrac{u_{n-1}}{n}\\).</p>
-                <p>Or \\(\\dfrac{u_{n-1}}{n} \\leq \\dfrac{2\\sqrt{n-1}}{n} \\to 0\\). Donc \\(\\dfrac{u_n^2}{n} \\to 1\\), d'où \\(\\boxed{\\dfrac{u_n}{\\sqrt{n}} \\to 1}\\).</p>`
-            },
-            {
-                title: "Exercice 8 — Suite récurrente un+1 = un − un²",
-                difficulty: 3,
-                enonce: `Soit \\(f(x) = x - x^2\\) et \\((u_n)\\) définie par \\(u_0 \\in \\,]0,1[\\) et \\(u_{n+1} = f(u_n)\\).
-                <p style="margin-top:0.75rem;"><strong>1.</strong> Étudier les variations de \\(f\\).</p>
-                <p><strong>2.</strong> Montrer que pour tout \\(n\\), \\(0 < u_n < \\dfrac{1}{n+1}\\).</p>
-                <p><strong>3.</strong> En déduire que \\(v_n = n\\,u_n\\) est croissante.</p>
-                <p><strong>4.</strong> Montrer que \\((v_n)\\) converge vers \\(l \\in \\,]0,1]\\).</p>
-                <p><strong>5.</strong> Montrer que \\(w_n = n(v_{n+1} - v_n)\\) converge vers \\(l(1-l)\\).</p>
-                <p><strong>6.</strong> Soit \\((t_n)\\) telle que \\(t_{n+1} - t_n \\geq \\frac{a}{n}\\) (\\(a > 0\\)) pour \\(n \\geq n_0\\). Montrer que \\(t_{2n} - t_n \\geq \\frac{a}{2}\\) puis que \\((t_n)\\) diverge.</p>
-                <p><strong>7.</strong> Montrer que \\(l = 1\\).</p>`,
-                correction: `<p><strong>1.</strong> \\(f(x) = x - x^2\\), \\(f'(x) = 1 - 2x\\). \\(f\\) est croissante sur \\([0, \\frac{1}{2}]\\) et décroissante sur \\([\\frac{1}{2}, 1]\\). Maximum : \\(f(\\frac{1}{2}) = \\frac{1}{4}\\).</p>
-                <p><strong>2.</strong> Par récurrence. \\(u_0 \\in ]0,1[\\) ✓. Si \\(0 < u_n < \\frac{1}{n+1}\\), alors \\(u_{n+1} = u_n(1-u_n) > 0\\).</p>
-                <p>Et \\(\\frac{1}{u_{n+1}} = \\frac{1}{u_n(1-u_n)} = \\frac{1}{u_n} \\cdot \\frac{1}{1-u_n} > \\frac{1}{u_n} + 1 > (n+1) + 1 = n+2\\).</p>
-                <p>Donc \\(u_{n+1} < \\frac{1}{n+2}\\). ✓</p>
-                <p><strong>3.</strong> \\(v_{n+1} - v_n = (n+1)u_{n+1} - nu_n = (n+1)u_n(1-u_n) - nu_n = u_n[(n+1)(1-u_n) - n] = u_n[1 - (n+1)u_n]\\).</p>
-                <p>Or \\(u_n < \\frac{1}{n+1}\\), donc \\((n+1)u_n < 1\\), d'où \\(v_{n+1} - v_n > 0\\). ✓</p>
-                <p><strong>4.</strong> \\((v_n)\\) est croissante. De plus \\(v_n = nu_n < \\frac{n}{n+1} < 1\\), donc majorée. Elle converge vers \\(l \\in [v_0, 1]\\). Comme \\(v_0 = 0 \\cdot u_0\\) (si \\(n\\) commence à 1 : \\(v_1 = u_1 > 0\\)), on a \\(l \\in ]0, 1]\\).</p>
-                <p><strong>5.</strong> \\(w_n = n(v_{n+1} - v_n) = n \\cdot u_n[1 - (n+1)u_n] = v_n\\left(1 - \\frac{(n+1)}{n}v_n\\right) \\to l(1-l)\\).</p>
-                <p><strong>6.</strong> \\(t_{2n} - t_n = \\sum_{k=n}^{2n-1}(t_{k+1} - t_k) \\geq \\sum_{k=n}^{2n-1} \\frac{a}{k} \\geq n \\cdot \\frac{a}{2n} = \\frac{a}{2}\\).</p>
-                <p>Donc \\(t_{2^m n_0} \\to +\\infty\\), et \\((t_n)\\) diverge.</p>
-                <p><strong>7.</strong> Si \\(l \\neq 1\\), alors \\(l(1-l) > 0\\). Pour \\(n\\) assez grand, \\(v_{n+1} - v_n \\geq \\frac{c}{n}\\) avec \\(c > 0\\). D'après la question 6, \\((v_n)\\) diverge. Contradiction car \\((v_n)\\) converge. Donc \\(\\boxed{l = 1}\\).</p>`
+                enonce: `Soit la suite \\((u_n)\\) définie par \\(u_0 = 3\\) et \\(u_{n+1} = \\dfrac{1}{3}u_n + 4\\).
+                <p style="margin-top:0.75rem;">1. Déterminer la limite \\(\\ell\\) éventuelle de \\((u_n)\\).</p>
+                <p>2. Poser \\(v_n = u_n - \\ell\\) et montrer que \\((v_n)\\) est géométrique.</p>
+                <p>3. Exprimer \\(u_n\\) en fonction de \\(n\\), puis calculer \\(S_n = \\displaystyle\\sum_{k=0}^{n} u_k\\).</p>`,
+                correction: `<p><strong>1.</strong> Si \\(\\ell\\) existe : \\(\\ell = \\frac{1}{3}\\ell + 4 \\Rightarrow \\frac{2}{3}\\ell = 4 \\Rightarrow \\ell = 6\\).</p>
+                <p><strong>2.</strong> \\(v_n = u_n - 6\\). On a \\(v_{n+1} = u_{n+1} - 6 = \\frac{1}{3}u_n + 4 - 6 = \\frac{1}{3}(u_n - 6) = \\frac{1}{3}v_n\\).</p>
+                <p>\\((v_n)\\) est géométrique de raison \\(q = \\frac{1}{3}\\) et \\(v_0 = 3 - 6 = -3\\).</p>
+                <p><strong>3.</strong> \\(v_n = -3 \\cdot \\left(\\frac{1}{3}\\right)^n\\), donc \\(u_n = 6 - 3 \\cdot \\left(\\frac{1}{3}\\right)^n\\).</p>
+                <p>\\(\\displaystyle S_n = \\sum_{k=0}^{n} u_k = 6(n+1) - 3\\sum_{k=0}^{n}\\left(\\frac{1}{3}\\right)^k = 6(n+1) - 3 \\cdot \\frac{1 - (1/3)^{n+1}}{2/3}\\)</p>
+                <p>\\(= 6(n+1) - \\frac{9}{2}\\left(1 - \\left(\\frac{1}{3}\\right)^{n+1}\\right)\\)</p>`
             }
         ],
-        videos: []
+        videos: [
+            { title: "Suites récurrentes — Méthode complète", duration: "14:32", desc: "Comment étudier une suite définie par récurrence : monotonie, bornes et convergence." },
+            { title: "Suites arithmético-géométriques", duration: "11:05", desc: "Résolution complète avec changement de variable et calcul de sommes." }
+        ]
     },
     {
         id: 2,
@@ -1926,6 +1668,255 @@ const chapters = [
 <!-- FIN POSTER -->
         `,
         exercices: [],
+        videos: []
+    },
+    {
+        id: 14,
+        title: "Polynômes",
+        branch: "algebre",
+        number: "L6",
+        description: "Définitions, opérations, racines, division euclidienne, factorisation, polynôme de degré 2, discriminant, relations de Viète, décomposition en éléments simples.",
+        tags: ["resume", "exercices"],
+        resume: `
+<div class="content-block">
+<h2>Résumé — Polynômes</h2>
+
+<h3>1. Définitions et vocabulaire</h3>
+
+<div class="definition">
+    <span class="label">Définition — Polynôme</span>
+    <p>Un polynôme non nul \\(P\\) est de la forme : \\(P(X) = a_nX^n + a_{n-1}X^{n-1} + \\cdots + a_1X + a_0\\) avec \\(a_n \\neq 0\\).</p>
+    <p><strong>Degré :</strong> \\(\\deg(P) = n\\). <strong>Coefficient dominant :</strong> \\(a_n\\). <strong>Terme constant :</strong> \\(a_0\\).</p>
+    <p>Convention : \\(\\deg(0) = -\\infty\\). On note \\(\\mathbb{R}[X]\\) l'ensemble des polynômes à coefficients réels.</p>
+</div>
+
+<div class="definition">
+    <span class="label">Définition — Égalité de polynômes</span>
+    <p>\\(P = Q \\iff\\) même degré et mêmes coefficients. Autrement dit : \\(P = Q \\iff P - Q = 0\\).</p>
+</div>
+
+<h3>2. Opérations sur les polynômes</h3>
+
+<div class="property">
+    <span class="label">Propriété — Degré et opérations</span>
+    <p>\\(\\deg(P \\times Q) = \\deg(P) + \\deg(Q)\\).</p>
+    <p>\\(\\deg(P + Q) \\leq \\max(\\deg(P), \\deg(Q))\\), avec égalité si \\(\\deg(P) \\neq \\deg(Q)\\).</p>
+</div>
+
+<h3>3. Racines d'un polynôme</h3>
+
+<div class="definition">
+    <span class="label">Définition — Racine</span>
+    <p>\\(a \\in \\mathbb{R}\\) est <strong>racine</strong> de \\(P\\) si \\(P(a) = 0\\).</p>
+</div>
+
+<div class="theorem">
+    <span class="label">Théorème — Factorisation par une racine</span>
+    <p>\\(a\\) est racine de \\(P \\iff (X - a)\\) divise \\(P\\), c'est-à-dire \\(P(X) = (X-a)Q(X)\\).</p>
+</div>
+
+<div class="definition">
+    <span class="label">Définition — Racine de multiplicité \\(m\\)</span>
+    <p>\\(a\\) est racine de \\(P\\) d'ordre \\(m\\) si \\(P = (X-a)^m Q\\) avec \\(Q(a) \\neq 0\\).</p>
+</div>
+
+<div class="theorem">
+    <span class="label">Théorème — Nombre maximal de racines</span>
+    <p>Un polynôme de degré \\(n\\) possède <strong>au plus \\(n\\) racines</strong> (comptées avec multiplicité).</p>
+    <p><strong>Corollaire :</strong> Si \\(P \\in \\mathbb{R}_n[X]\\) possède au moins \\(n+1\\) racines, alors \\(P = 0\\).</p>
+</div>
+
+<div class="property">
+    <span class="label">Factorisation complète</span>
+    <p>Si \\(P\\) de degré \\(n\\) a \\(n\\) racines distinctes \\(\\alpha_1, \\ldots, \\alpha_n\\) : \\[P(X) = a_n \\prod_{i=1}^n (X - \\alpha_i)\\]</p>
+</div>
+
+<div class="method">
+    <span class="label">Méthode — Division euclidienne</span>
+    <p>Pour \\(A, B \\in \\mathbb{R}[X]\\) avec \\(B \\neq 0\\), il existe un unique couple \\((Q, R)\\) tel que :</p>
+    <p>\\(A = BQ + R\\) avec \\(\\deg(R) < \\deg(B)\\).</p>
+</div>
+
+<div class="method">
+    <span class="label">Méthode — Factoriser \\(P(X)\\) de degré \\(\\geq 3\\)</span>
+    <p><strong>1.</strong> Chercher une racine évidente \\(\\alpha\\) (parmi \\(0, \\pm1, \\pm2, \\ldots\\)).</p>
+    <p><strong>2.</strong> Factoriser : \\(P(X) = (X - \\alpha)Q(X)\\) par identification ou division euclidienne.</p>
+    <p><strong>3.</strong> Si \\(\\deg(Q) \\leq 2\\) : résoudre directement. Sinon : itérer.</p>
+</div>
+
+<h3>4. Polynôme de degré 2</h3>
+
+<div class="definition">
+    <span class="label">Définition — Discriminant</span>
+    <p>Pour \\(P(x) = ax^2 + bx + c\\) avec \\(a \\neq 0\\) : \\(\\Delta = b^2 - 4ac\\).</p>
+</div>
+
+<div class="theorem">
+    <span class="label">Théorème — Racines selon le discriminant</span>
+    <p><strong>Si \\(\\Delta > 0\\) :</strong> deux racines distinctes \\(x_{1,2} = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}\\). Factorisation : \\(P = a(x-x_1)(x-x_2)\\).</p>
+    <p><strong>Si \\(\\Delta = 0\\) :</strong> une racine double \\(x_0 = -\\dfrac{b}{2a}\\). Factorisation : \\(P = a(x-x_0)^2\\).</p>
+    <p><strong>Si \\(\\Delta < 0\\) :</strong> aucune racine réelle.</p>
+</div>
+
+<div class="property">
+    <span class="label">Relations de Viète</span>
+    <p>Si \\(x_1, x_2\\) sont les racines de \\(ax^2+bx+c\\) :</p>
+    <p>\\(x_1 + x_2 = -\\dfrac{b}{a}\\) &emsp; et &emsp; \\(x_1 x_2 = \\dfrac{c}{a}\\).</p>
+    <p><strong>Réciproquement :</strong> si \\(x_1 + x_2 = s\\) et \\(x_1 x_2 = p\\), alors \\(x_1, x_2\\) sont solutions de \\(x^2 - sx + p = 0\\).</p>
+</div>
+
+<div class="theorem">
+    <span class="label">Signe d'un trinôme</span>
+    <p><strong>\\(\\Delta < 0\\) :</strong> \\(P(x)\\) est du signe de \\(a\\) pour tout \\(x\\).</p>
+    <p><strong>\\(\\Delta = 0\\) :</strong> \\(P(x)\\) est du signe de \\(a\\) sur \\(\\mathbb{R} \\setminus \\{x_0\\}\\).</p>
+    <p><strong>\\(\\Delta > 0\\) :</strong> \\(P(x)\\) est du signe de \\(a\\) en dehors de \\([x_1, x_2]\\), du signe opposé à \\(a\\) sur \\(]x_1, x_2[\\).</p>
+</div>
+
+</div>
+        `,
+        exercices: [
+            {
+                title: "Exercice 1 — Factorisation d'un polynôme de degré 3",
+                difficulty: 1,
+                enonce: \`On pose \\(P(x) = x^3 + 4x^2 + x - 6\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> Prouver que 1 est racine de \\(P\\).</p>
+                <p><strong>2.</strong> Déterminer \\(a, b, c\\) tels que \\(P(x) = (x-1)(ax^2+bx+c)\\).</p>
+                <p><strong>3.</strong> En déduire une factorisation complète de \\(P(x)\\).</p>
+                <p><strong>4.</strong> Résoudre \\(P(x) = 0\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(P(1) = 1 + 4 + 1 - 6 = 0\\). Donc 1 est racine de \\(P\\). ✓</p>
+                <p><strong>2.</strong> \\((x-1)(ax^2+bx+c) = ax^3 + (b-a)x^2 + (c-b)x - c\\).</p>
+                <p>Par identification : \\(a = 1\\), \\(b - a = 4 \\Rightarrow b = 5\\), \\(-c = -6 \\Rightarrow c = 6\\).</p>
+                <p>Donc \\(P(x) = (x-1)(x^2 + 5x + 6)\\).</p>
+                <p><strong>3.</strong> \\(x^2 + 5x + 6 = (x+2)(x+3)\\) (\\(\\Delta = 25 - 24 = 1\\)).</p>
+                <p>\\(\\boxed{P(x) = (x-1)(x+2)(x+3)}\\).</p>
+                <p><strong>4.</strong> \\(P(x) = 0 \\iff x = 1\\) ou \\(x = -2\\) ou \\(x = -3\\). \\(S = \\{-3, -2, 1\\}\\).</p>\`
+            },
+            {
+                title: "Exercice 2 — Factorisation et inéquation",
+                difficulty: 2,
+                enonce: \`Soit \\(P(x) = x^3 - 7x^2 + 11x - 2\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> Déterminer une racine évidente de \\(P\\).</p>
+                <p><strong>2.</strong> En déduire une factorisation de \\(P\\).</p>
+                <p><strong>3.</strong> Résoudre \\(P(x) > 0\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(P(2) = 8 - 28 + 22 - 2 = 0\\). Donc 2 est racine.</p>
+                <p><strong>2.</strong> Par division : \\(P(x) = (x-2)(x^2 - 5x + 1)\\).</p>
+                <p>\\(\\Delta = 25 - 4 = 21\\). Racines : \\(x = \\dfrac{5 \\pm \\sqrt{21}}{2}\\).</p>
+                <p>\\(\\boxed{P(x) = (x-2)\\left(x - \\frac{5-\\sqrt{21}}{2}\\right)\\left(x - \\frac{5+\\sqrt{21}}{2}\\right)}\\).</p>
+                <p><strong>3.</strong> On pose \\(\\alpha = \\frac{5-\\sqrt{21}}{2} \\approx 0{,}21\\) et \\(\\beta = \\frac{5+\\sqrt{21}}{2} \\approx 4{,}79\\).</p>
+                <p>Tableau de signe : \\(P(x) > 0 \\iff x \\in \\,]\\alpha, 2[\\, \\cup \\,]\\beta, +\\infty[\\).</p>\`
+            },
+            {
+                title: "Exercice 3 — Polynôme de degré 4",
+                difficulty: 2,
+                enonce: \`Soit \\(P(x) = x^4 + x^3 - 3x^2 - 4x - 4\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> Déterminer une racine évidente de \\(P\\).</p>
+                <p><strong>2.</strong> En déduire une factorisation de \\(P\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(P(2) = 16 + 8 - 12 - 8 - 4 = 0\\). Donc 2 est racine. ✓</p>
+                <p><strong>2.</strong> \\(P(x) = (x-2)(x^3 + 3x^2 + 3x + 2)\\).</p>
+                <p>Pour \\(Q(x) = x^3 + 3x^2 + 3x + 2\\) : \\(Q(-2) = -8 + 12 - 6 + 2 = 0\\). Donc \\(-2\\) est racine.</p>
+                <p>\\(Q(x) = (x+2)(x^2 + x + 1)\\).</p>
+                <p>\\(x^2 + x + 1\\) : \\(\\Delta = 1 - 4 = -3 < 0\\), pas de racine réelle.</p>
+                <p>\\(\\boxed{P(x) = (x-2)(x+2)(x^2+x+1)}\\).</p>\`
+            },
+            {
+                title: "Exercice 4 — Racines multiples et factorisation de degré 5",
+                difficulty: 3,
+                enonce: \`\\(P(x) = x^5 + 5x^4 + 10x^3 + 11x^2 + 7x + 2\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> Prouver que \\(-1\\) est racine et déterminer \\(Q\\) tel que \\(P(x) = (x+1)Q(x)\\).</p>
+                <p><strong>2.</strong> Prouver que \\(-1\\) est racine de \\(Q\\) et déterminer \\(R\\) tel que \\(Q(x) = (x+1)R(x)\\).</p>
+                <p><strong>3.</strong> Prouver que \\(-2\\) est racine de \\(R\\) et factoriser \\(P\\) complètement.</p>
+                <p><strong>4.</strong> Résoudre \\(P(x) \\leq 0\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(P(-1) = -1 + 5 - 10 + 11 - 7 + 2 = 0\\). ✓</p>
+                <p>Par division : \\(Q(x) = x^4 + 4x^3 + 6x^2 + 5x + 2\\).</p>
+                <p><strong>2.</strong> \\(Q(-1) = 1 - 4 + 6 - 5 + 2 = 0\\). ✓</p>
+                <p>\\(Q(x) = (x+1)(x^3 + 3x^2 + 3x + 2) = (x+1)R(x)\\).</p>
+                <p><strong>3.</strong> \\(R(-2) = -8 + 12 - 6 + 2 = 0\\). ✓</p>
+                <p>\\(R(x) = (x+2)(x^2+x+1)\\).</p>
+                <p>\\(\\boxed{P(x) = (x+1)^2(x+2)(x^2+x+1)}\\).</p>
+                <p><strong>4.</strong> \\(x^2+x+1 > 0\\) pour tout \\(x\\) (\\(\\Delta = -3 < 0\\)).</p>
+                <p>\\(P(x) \\leq 0 \\iff (x+1)^2(x+2) \\leq 0 \\iff x+2 \\leq 0 \\iff \\boxed{x \\leq -2}\\) (car \\((x+1)^2 \\geq 0\\)).</p>
+                <p>Attention : en \\(x = -1\\), \\(P(-1) = 0\\) donc \\(x = -1\\) est aussi solution.</p>
+                <p>\\(S = ]-\\infty, -2] \\cup \\{-1\\}\\).</p>\`
+            },
+            {
+                title: "Exercice 5 — Polynôme de degré 4 avec deux racines données",
+                difficulty: 2,
+                enonce: \`Soit \\(f(x) = x^4 + 12x^3 + 18x^2 - 140x - 147\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> Vérifier que \\(-1\\) et \\(3\\) sont solutions de \\(f(x) = 0\\).</p>
+                <p><strong>2.</strong> En déduire qu'il existe \\(h(x)\\) tel que \\(f(x) = (x+1)(x-3)h(x)\\).</p>
+                <p><strong>3.</strong> Déterminer \\(h(x)\\) et résoudre \\(f(x) = 0\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(f(-1) = 1 - 12 + 18 + 140 - 147 = 0\\) ✓. \\(f(3) = 81 + 324 + 162 - 420 - 147 = 0\\) ✓.</p>
+                <p><strong>2.</strong> \\(-1\\) et \\(3\\) sont racines, donc \\((x+1)\\) et \\((x-3)\\) divisent \\(f\\). Comme \\(-1 \\neq 3\\), \\((x+1)(x-3) = x^2 - 2x - 3\\) divise \\(f\\).</p>
+                <p><strong>3.</strong> Division de \\(f\\) par \\(x^2 - 2x - 3\\) :</p>
+                <p>\\(f(x) = (x^2 - 2x - 3)(x^2 + 14x + 49) = (x+1)(x-3)(x+7)^2\\).</p>
+                <p>\\(f(x) = 0 \\iff \\boxed{x \\in \\{-7, -1, 3\\}}\\) (\\(-7\\) est racine double).</p>\`
+            },
+            {
+                title: "Exercice 6 — Polynôme constant par récurrence",
+                difficulty: 2,
+                enonce: \`Soit \\(P\\) un polynôme tel que \\(P(x+1) = P(x)\\) pour tout \\(x \\in \\mathbb{R}\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> On pose \\(Q(X) = P(X) - P(0)\\). Montrer par récurrence que \\(\\forall n \\in \\mathbb{N},\\; Q(n) = 0\\).</p>
+                <p><strong>2.</strong> Montrer que \\(P\\) est un polynôme constant.</p>\`,
+                correction: \`<p><strong>1.</strong> \\(Q(0) = P(0) - P(0) = 0\\). Si \\(Q(n) = 0\\), alors \\(Q(n+1) = P(n+1) - P(0) = P(n) - P(0) = Q(n) = 0\\). Par récurrence, \\(Q(n) = 0\\) pour tout \\(n \\in \\mathbb{N}\\). ✓</p>
+                <p><strong>2.</strong> \\(Q\\) est un polynôme qui s'annule en tous les entiers naturels, donc il possède une infinité de racines. Or un polynôme non nul de degré \\(d\\) a au plus \\(d\\) racines. Donc \\(Q = 0\\), c'est-à-dire \\(P(X) = P(0)\\) pour tout \\(X\\). \\(P\\) est constant. ∎</p>\`
+            },
+            {
+                title: "Exercice 7 — Détermination de polynômes par interpolation",
+                difficulty: 2,
+                enonce: \`<p><strong>1.</strong> Déterminer \\(P\\) de degré 1 tel que \\(P(1) = 0\\) et \\(P(-2) = 1\\).</p>
+                <p><strong>2.</strong> Déterminer \\(P\\) de degré 2 tel que \\(P(1) = 2\\), \\(P(2) = 0\\) et \\(P(-1) = -1\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(P(x) = ax + b\\). \\(P(1) = 0 \\Rightarrow a + b = 0\\). \\(P(-2) = 1 \\Rightarrow -2a + b = 1\\).</p>
+                <p>\\(a + b = 0\\) et \\(-2a + b = 1\\). Soustraction : \\(3a = -1\\), \\(a = -\\frac{1}{3}\\), \\(b = \\frac{1}{3}\\).</p>
+                <p>\\(\\boxed{P(x) = -\\frac{1}{3}x + \\frac{1}{3} = \\frac{1-x}{3}}\\).</p>
+                <p><strong>2.</strong> \\(P(x) = ax^2 + bx + c\\). Le système donne :</p>
+                <p>\\(a + b + c = 2\\), \\(4a + 2b + c = 0\\), \\(a - b + c = -1\\).</p>
+                <p>\\(L_1 - L_3 : 2b = 3 \\Rightarrow b = \\frac{3}{2}\\). \\(L_2 - L_1 : 3a + b = -2 \\Rightarrow a = \\frac{-2 - 3/2}{3} = -\\frac{7}{6}\\).</p>
+                <p>\\(c = 2 - a - b = 2 + \\frac{7}{6} - \\frac{3}{2} = \\frac{5}{3}\\).</p>
+                <p>\\(\\boxed{P(x) = -\\frac{7}{6}x^2 + \\frac{3}{2}x + \\frac{5}{3}}\\).</p>\`
+            },
+            {
+                title: "Exercice 8 — Décomposition en éléments simples",
+                difficulty: 2,
+                enonce: \`<p><strong>1.</strong> Déterminer \\(a, b, c\\) tels que : \\(\\forall x \\in \\mathbb{R} \\setminus \\{-1, 0, 1\\}\\),
+                \\[\\frac{1}{x^3 - x} = \\frac{a}{x-1} + \\frac{b}{x} + \\frac{c}{x+1}\\]</p>
+                <p><strong>2.</strong> Déterminer \\(a, b, c\\) tels que : \\(\\forall x \\in \\mathbb{R} \\setminus \\{-1\\}\\),
+                \\[\\frac{x^2}{x+1} = ax + b + \\frac{c}{x+1}\\]</p>\`,
+                correction: \`<p><strong>1.</strong> \\(x^3 - x = x(x-1)(x+1)\\). On multiplie par \\(x(x-1)(x+1)\\) :</p>
+                <p>\\(1 = ax(x+1) + b(x-1)(x+1) + cx(x-1)\\).</p>
+                <p>\\(x = 0 : 1 = b(-1)(1) \\Rightarrow b = -1\\).</p>
+                <p>\\(x = 1 : 1 = a(1)(2) \\Rightarrow a = \\frac{1}{2}\\).</p>
+                <p>\\(x = -1 : 1 = c(-1)(-2) \\Rightarrow c = \\frac{1}{2}\\).</p>
+                <p>\\(\\boxed{\\frac{1}{x^3-x} = \\frac{1}{2(x-1)} - \\frac{1}{x} + \\frac{1}{2(x+1)}}\\).</p>
+                <p><strong>2.</strong> Division euclidienne de \\(x^2\\) par \\(x+1\\) : \\(x^2 = (x+1)(x-1) + 1\\).</p>
+                <p>Donc \\(\\dfrac{x^2}{x+1} = x - 1 + \\dfrac{1}{x+1}\\).</p>
+                <p>\\(\\boxed{a = 1,\\; b = -1,\\; c = 1}\\).</p>\`
+            },
+            {
+                title: "Exercice 9 — Suite de polynômes récurrents",
+                difficulty: 3,
+                enonce: \`On définit \\(P_0 = 2\\), \\(P_1 = X\\) et \\(\\forall n \\in \\mathbb{N},\\; P_{n+2} = XP_{n+1} - P_n\\).
+                <p style="margin-top:0.75rem;"><strong>1.</strong> Calculer \\(P_2\\) et \\(P_3\\).</p>
+                <p><strong>2.</strong> Déterminer le degré et le coefficient dominant de \\(P_n\\).</p>\`,
+                correction: \`<p><strong>1.</strong> \\(P_2 = XP_1 - P_0 = X \\cdot X - 2 = X^2 - 2\\).</p>
+                <p>\\(P_3 = XP_2 - P_1 = X(X^2 - 2) - X = X^3 - 3X\\).</p>
+                <p><strong>2.</strong> \\(\\deg(P_0) = 0\\), \\(\\deg(P_1) = 1\\), \\(\\deg(P_2) = 2\\), \\(\\deg(P_3) = 3\\).</p>
+                <p>Par récurrence : si \\(\\deg(P_n) = n\\) et \\(\\deg(P_{n+1}) = n+1\\), alors \\(\\deg(P_{n+2}) = \\deg(XP_{n+1}) = n+2\\) (car le terme \\(XP_{n+1}\\) domine \\(P_n\\)).</p>
+                <p>Coefficient dominant : \\(P_0 \\to 2\\), \\(P_1 \\to 1\\), \\(P_2 \\to 1\\), \\(P_3 \\to 1\\).</p>
+                <p>Pour \\(n \\geq 1\\), le coefficient dominant de \\(P_{n+2}\\) est celui de \\(XP_{n+1}\\), qui est le coefficient dominant de \\(P_{n+1}\\). Par récurrence, il vaut \\(\\boxed{1}\\) pour tout \\(n \\geq 1\\).</p>\`
+            },
+            {
+                title: "Exercice 10 — Équation à coefficients symétriques",
+                difficulty: 3,
+                enonce: \`Résoudre : \\(6x^4 + 5x^3 - 38x^2 + 5x + 6 = 0\\).\`,
+                correction: \`<p>Les coefficients sont symétriques : \\(6, 5, -38, 5, 6\\). Pour \\(x \\neq 0\\), on pose \\(t = x + \\frac{1}{x}\\).</p>
+                <p>On divise par \\(x^2\\) : \\(6\\left(x^2 + \\frac{1}{x^2}\\right) + 5\\left(x + \\frac{1}{x}\\right) - 38 = 0\\).</p>
+                <p>Or \\(x^2 + \\frac{1}{x^2} = t^2 - 2\\), donc : \\(6(t^2 - 2) + 5t - 38 = 0 \\iff 6t^2 + 5t - 50 = 0\\).</p>
+                <p>\\(\\Delta = 25 + 1200 = 1225 = 35^2\\). \\(t_1 = \\frac{-5+35}{12} = \\frac{5}{2}\\), \\(t_2 = \\frac{-5-35}{12} = -\\frac{10}{3}\\).</p>
+                <p><strong>Cas \\(t = \\frac{5}{2}\\) :</strong> \\(x + \\frac{1}{x} = \\frac{5}{2} \\iff 2x^2 - 5x + 2 = 0\\). \\(\\Delta = 9\\). \\(x = 2\\) ou \\(x = \\frac{1}{2}\\).</p>
+                <p><strong>Cas \\(t = -\\frac{10}{3}\\) :</strong> \\(x + \\frac{1}{x} = -\\frac{10}{3} \\iff 3x^2 + 10x + 3 = 0\\). \\(\\Delta = 64\\). \\(x = -3\\) ou \\(x = -\\frac{1}{3}\\).</p>
+                <p>\\(\\boxed{S = \\left\\{-3,\\; -\\frac{1}{3},\\; \\frac{1}{2},\\; 2\\right\\}}\\).</p>\`
+            }
+        ],
         videos: []
     }
 ];
